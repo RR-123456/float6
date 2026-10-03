@@ -1,0 +1,56 @@
+import com.pragon.mobile.Calc
+fun main() {
+    var fail = 0
+    fun chk(inp: String, exp: String?) {
+        val r = Calc.fromSpeech(inp)
+        val got = when (r) { null -> null; is Calc.Result -> Calc.format(r.value); is Calc.Failure -> "ERR:" + r.msg; else -> "?" }
+        if (got != exp) { fail++; println("FAIL '$inp' -> $got (want $exp)") }
+    }
+    chk("calculate 25 times 4", "100")
+    chk("what is 12 plus 7", "19")
+    chk("whats 100 divided by 8", "12.5")
+    chk("25 times 4", "100")
+    chk("15 percent of 200", "30")
+    chk("what is 15 percent of 200", "30")
+    chk("200 plus 10 percent", "220")
+    chk("200 minus 10 percent", "180")
+    chk("square root of 144", "12")
+    chk("what is the square root of 144", "12")
+    chk("5 squared", "25")
+    chk("3 cubed", "27")
+    chk("2 power 10", "1024")
+    chk("2 to the power of 8", "256")
+    chk("two plus two", "4")
+    chk("twenty five times four", "100")
+    chk("one hundred and five plus five", "110")
+    chk("two lakh plus 50 thousand", "250000")
+    chk("5 lakh minus 1 lakh", "400000")
+    chk("2 point 5 times 4", "10")
+    chk("two point five times four", "10")
+    chk("10 divided by 0", "ERR:I can't divide by zero.")
+    chk("calculate 2 plus 3 times 4", "14")
+    chk("open bracket 2 plus 3 close bracket times 4", "20")
+    chk("10 minus 3 minus 2", "5")
+    chk("10 over 4", "2.5")
+    chk("1 divided by 3", "0.33333333")
+    chk("17 mod 5", "2")
+    chk("calculate 7 x 8", "56")
+    chk("what is the capital of france", null)
+    chk("what is 5", null)
+    chk("what is your name", null)
+    chk("open youtube", null)
+    chk("set a timer for 5 minutes", null)
+    chk("set alarm for 7 30 am", null)
+    chk("play despacito", null)
+    chk("call 98765 43210", null)
+    chk("calculate 25 times 4 on the calculator", "100")
+    chk("25 times 4 on calculator", "100")
+    chk("open calculator and calculate 6 plus 6", "12")
+    chk("negative 5 plus 10", "5")
+    chk("square root of negative 4", "ERR:There's no real square root of a negative number.")
+    val r = Calc.fromSpeech("calculate 25 times 4 on the calculator") as Calc.Result
+    println("display=${r.display} spoken=${r.spoken} keys=${r.keys} onScreen=${r.onScreen}")
+    val r2 = Calc.fromSpeech("12 plus 7") as Calc.Result
+    println("display=${r2.display} spoken=${r2.spoken} keys=${r2.keys} onScreen=${r2.onScreen}")
+    println(if (fail == 0) "ALL CALC OK" else "$fail failures")
+}

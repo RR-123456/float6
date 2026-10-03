@@ -1,0 +1,333 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Pragon Settings</title>
+<style>
+:root{--cyan:#00d4ff;--bg:#0a0a0f;--text:#e8eaf0;--muted:rgba(200,210,230,.45);--green:#33ffb0;--red:#ef4444}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+body{padding:calc(14px + env(safe-area-inset-top,0px)) 16px 30px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.top b{flex:1;font:900 16px Orbitron,sans-serif;letter-spacing:2px;color:var(--cyan);text-shadow:0 0 16px rgba(0,212,255,.4)}
+.back{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:var(--cyan);border-radius:10px;padding:8px 14px;font-size:12px;letter-spacing:1px;cursor:pointer}
+.st{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:16px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 8px var(--green)}
+h3{font:700 11px Orbitron,sans-serif;letter-spacing:2px;color:var(--cyan);margin:22px 0 8px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(0,212,255,.15);border-radius:14px;padding:12px}
+input{width:100%;padding:11px 13px;margin-bottom:8px;background:rgba(255,255,255,.03);border:1.5px solid rgba(0,212,255,.15);border-radius:12px;color:var(--text);font-size:14px;outline:none}
+input:focus{border-color:var(--cyan)}
+.btn{width:100%;padding:12px;border-radius:12px;background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:var(--cyan);font:700 11px Orbitron,sans-serif;letter-spacing:2px;cursor:pointer}
+.btn:active{background:rgba(0,212,255,.25)}.btn.red{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);color:var(--red)}
+.or{text-align:center;color:var(--muted);font-size:11px;margin:10px 0}
+.perm{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,212,255,.08)}.perm:last-child{border:0}
+.perm span{flex:1;font-size:13px}.pill{font:700 10px Orbitron,sans-serif;letter-spacing:1px;padding:4px 9px;border-radius:20px;background:rgba(239,68,68,.12);color:var(--red)}.pill.on{background:rgba(51,255,176,.12);color:var(--green)}
+.perm .btn{width:auto;padding:8px 12px;font-size:10px}
+
+.seg{display:flex;gap:6px;margin-bottom:10px}.seg button{flex:1;padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(0,212,255,.15);color:var(--muted);font:700 10px Orbitron,sans-serif;letter-spacing:1px;cursor:pointer}
+.seg button small{font:400 10px sans-serif;letter-spacing:0;opacity:.8}.seg button.on{background:rgba(0,212,255,.15);border-color:var(--cyan);color:var(--cyan)}
+.hint{font-size:11px;color:var(--muted);margin:2px 0 10px;line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.chips span{padding:5px 10px;border-radius:20px;border:1px solid rgba(0,212,255,.25);color:var(--cyan);font-size:12px;cursor:pointer}
+.row2{display:flex;gap:8px}.row2>*{flex:1}label.lb{display:block;font-size:12px;color:var(--muted);margin:2px 0 4px}
+select{width:100%;padding:11px 13px;margin-bottom:8px;background:#12121a;border:1.5px solid rgba(0,212,255,.15);border-radius:12px;color:var(--text);font-size:14px;outline:none}
+input[type=range]{padding:0;margin:4px 0 10px;accent-color:#00d4ff}.chk{display:flex;align-items:center;gap:10px;font-size:13px;margin:8px 0}.chk input{width:auto;margin:0}
+.bar{height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#00d4ff,#33ffb0);transition:width .3s}
+.mrow{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid rgba(0,212,255,.08);font-size:13px;color:var(--text)}.mrow span{flex:1;word-break:break-all}.mrow small{color:var(--muted)}.mrow button{padding:6px 10px;border-radius:10px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.1);color:var(--cyan);font:700 10px sans-serif}.mrow button.d{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.1);color:var(--red)}.mrow.cur span{color:var(--green)}
+.pk{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(0,212,255,.08);font-size:13px}.pk input{width:auto;margin:0}.pk span{flex:1}
+.lvl{font:700 9px Orbitron,sans-serif;letter-spacing:1px;padding:3px 8px;border-radius:12px}.lvl.HIGH{background:rgba(239,68,68,.15);color:#ef4444}.lvl.MEDIUM{background:rgba(251,191,36,.15);color:#fbbf24}.lvl.LOW{background:rgba(0,212,255,.1);color:#00d4ff}
+.fnd{padding:9px 0;border-bottom:1px solid rgba(0,212,255,.08);font-size:13px}.fnd ul{margin:4px 0 6px 16px;padding:0;color:var(--muted);font-size:11px}.fnd .acts{display:flex;gap:6px}.fnd .acts button{padding:6px 10px;border-radius:10px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.1);color:var(--cyan);font:700 9px sans-serif}
+.lg{display:flex;gap:6px;font-size:12px;padding:3px 0}.lg b{flex:1;word-break:break-all;font-weight:400}.lg.bad b{color:#ef4444}
+.tabs{display:flex;gap:6px;margin-bottom:8px}.tabs button{flex:1;padding:9px 2px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(0,212,255,.15);color:var(--muted);font:700 10px sans-serif}.tabs button.on{background:rgba(0,212,255,.15);border-color:var(--cyan);color:var(--cyan)}
+.applist{max-height:320px;overflow:auto;border:1px solid rgba(0,212,255,.1);border-radius:10px;padding:0 8px}
+pre.mem{white-space:pre-wrap;font:12px/1.5 sans-serif;color:var(--muted);margin:6px 0 10px}
+</style></head><body>
+<div class="top"><b>SETTINGS</b><button class="back" onclick="N.close()">← BACK</button></div>
+<div class="st"><span class="dot" id="dot"></span><span id="stt">Not paired yet</span></div>
+
+<h3>MODE</h3>
+<div class="card">
+  <div class="seg"><button id="m_assistant" onclick="pickMode('assistant')">ASSISTANT<br><small>talk only</small></button><button id="m_master" onclick="pickMode('master')">MASTER<br><small>talk + act</small></button><button id="m_agent" onclick="pickMode('agent')">AGENT<br><small>act</small></button></div>
+  <div class="hint" id="modehint"></div>
+  <div class="hint">You can also say it: <b>"agent mode"</b>, <b>"assistant mode"</b>, <b>"master mode"</b>, or tap the mode chip at the top of the chat.</div>
+</div>
+
+<h3>VOICE &amp; LANGUAGE</h3>
+<div class="card">
+  <label class="lb">Call me</label><input id="callme" placeholder="sir" autocomplete="off">
+  <label class="lb">I speak (listening language)</label>
+  <select id="slang"><option value="">Phone's language</option><option value="en-IN">English (India)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option><option value="hi-IN">Hindi</option><option value="ta-IN">Tamil</option><option value="te-IN">Telugu</option><option value="ml-IN">Malayalam</option><option value="kn-IN">Kannada</option><option value="bn-IN">Bengali</option><option value="mr-IN">Marathi</option><option value="gu-IN">Gujarati</option><option value="pa-IN">Punjabi</option><option value="es-ES">Spanish</option><option value="fr-FR">French</option><option value="de-DE">German</option><option value="ar-SA">Arabic</option><option value="ja-JP">Japanese</option><option value="ko-KR">Korean</option><option value="zh-CN">Chinese</option><option value="ru-RU">Russian</option></select>
+  <label class="lb">Pragon replies in</label>
+  <select id="rlang"><option value="">Whatever language I use</option><option>English</option><option>Hindi</option><option>Tamil</option><option>Telugu</option><option>Malayalam</option><option>Kannada</option><option>Bengali</option><option>Marathi</option><option>Spanish</option><option>French</option><option>German</option></select>
+  <label class="lb">Voice</label>
+  <select id="vname"><option value="">Best available</option></select>
+  <label class="lb">Speed <span id="rv"></span></label><input id="vrate" type="range" min="0.6" max="1.6" step="0.05">
+  <label class="lb">Pitch <span id="pv"></span></label><input id="vpitch" type="range" min="0.6" max="1.4" step="0.05">
+  <label class="chk"><input id="stype" type="checkbox"> Also speak replies to typed messages</label>
+  <label class="chk"><input id="fwake" type="checkbox"> Float mode: only answer questions when I say "Pragon"</label>
+  <button class="btn" style="margin-bottom:8px" onclick="N.nextVoice();setTimeout(loadVoice,500)">CHANGE VOICE (or say "Pragon, change your voice")</button>
+  <div class="row2"><button class="btn" onclick="saveVoice()">SAVE</button><button class="btn" onclick="saveVoice();setTimeout(()=>N.testVoice(),300)">SAVE + TEST VOICE</button></div>
+  <div class="hint" style="margin-top:8px">Voices come from your phone's text-to-speech engine. For the most natural sound, install the Google or Samsung voice data for your language in Settings &gt; System &gt; Languages &gt; Text-to-speech.</div>
+</div>
+
+<h3>WHAT PRAGON REMEMBERS</h3>
+<div class="card">
+  <div class="hint" id="memst" style="margin:0 0 6px"></div><pre class="mem" id="memtx"></pre>
+  <button class="btn red" onclick="N.clearMemory();setTimeout(loadMem,200)">FORGET EVERYTHING</button>
+</div>
+
+<h3>CONNECT TO PC</h3>
+<div class="card">
+  <button class="btn" onclick="N.scanQr()">SCAN QR FROM PRAGON</button>
+  <div class="or">— or enter it manually —</div>
+  <input id="host" placeholder="PC address, e.g. 192.168.1.2:8000" autocomplete="off">
+  <input id="key" placeholder="Pairing key shown under the QR" autocomplete="off" autocapitalize="characters">
+  <button class="btn" onclick="N.connect(host.value.trim(),key.value.trim())">CONNECT</button>
+</div>
+
+<h3>AI ENGINE (STANDALONE)</h3>
+<div class="card">
+  <div class="seg"><button id="e_gemini" onclick="pickEng('gemini')">GEMINI<br><small>online</small></button><button id="e_ollama" onclick="pickEng('ollama')">OLLAMA<br><small>offline</small></button><button id="e_openai" onclick="pickEng('openai')">CUSTOM<br><small>any server</small></button></div>
+  <div id="box_ollama" style="display:none">
+    <div class="hint">Ollama runs on your PC (or Termux). On the PC set <b>OLLAMA_HOST=0.0.0.0</b> so the phone can reach it, then use the PC's address here, e.g. 192.168.1.2:11434.</div>
+    <input id="ohost" placeholder="Ollama address, e.g. 192.168.1.2:11434" autocomplete="off" autocapitalize="none">
+    <input id="omodel" list="mlist" placeholder="Model, e.g. hermes3" autocomplete="off" autocapitalize="none">
+    <datalist id="mlist"></datalist>
+    <div class="chips"><span onclick="setModel('hermes3')">hermes3</span><span onclick="setModel('llama3.2')">llama3.2</span><span onclick="setModel('qwen2.5')">qwen2.5</span><span onclick="setModel('gemma3')">gemma3</span><span onclick="setModel('phi4-mini')">phi4-mini</span></div>
+    <button class="btn" onclick="refreshInstalled()">LIST INSTALLED MODELS</button>
+    <div style="height:8px"></div>
+    <div class="hint" style="margin-top:4px"><b>Models on the server</b> (tap USE to talk to one):</div>
+    <div id="inst" class="hint">Tap LIST INSTALLED MODELS.</div>
+    <div style="height:6px"></div>
+    <input id="pullname" placeholder="Model to download, e.g. llama3.2:3b or hf.co/user/repo" autocomplete="off" autocapitalize="none">
+    <div class="chips"><span onclick="pullname.value='llama3.2:3b'">llama3.2:3b</span><span onclick="pullname.value='qwen2.5:3b'">qwen2.5:3b</span><span onclick="pullname.value='gemma3:4b'">gemma3:4b</span><span onclick="pullname.value='phi4-mini'">phi4-mini</span><span onclick="pullname.value='hermes3:3b'">hermes3:3b</span><span onclick="pullname.value='qwen2.5:7b'">qwen2.5:7b</span></div>
+    <button class="btn" id="pullbtn" onclick="doPull()">PULL (DOWNLOAD) MODEL</button>
+    <div class="bar" id="pullbar" style="display:none"><i id="pullfill"></i></div>
+    <div class="hint" id="pullst"></div>
+    <div class="hint">The download happens on the server (your PC), so keep it on and awake. You can also say <b>"ollama pull llama3.2"</b> in chat.</div>
+  </div>
+  <div id="box_openai" style="display:none">
+    <div class="hint">Works with any OpenAI-compatible server: LM Studio, llama.cpp server, vLLM, OpenRouter, an OpenClaw gateway and more. Use the address up to <b>/v1</b>.</div>
+    <input id="cbase" placeholder="Base URL, e.g. http://192.168.1.2:1234/v1" autocomplete="off" autocapitalize="none">
+    <input id="ckey" type="password" placeholder="API key (leave empty if not needed)" autocomplete="off">
+    <input id="cmodel" list="mlist" placeholder="Model name the server uses" autocomplete="off" autocapitalize="none">
+    <button class="btn" onclick="refreshModels()">LIST MODELS FROM SERVER</button>
+    <div class="hint" id="keyst"></div>
+  </div>
+  <div class="hint" id="modelst"></div>
+  <div style="height:8px"></div>
+  <button class="btn" onclick="saveEng()">SAVE ENGINE</button>
+  <div class="or" style="margin:10px 0 0">You can also switch engines from the chip at the top of the chat screen. Offline engines need a server on your Wi-Fi (or Termux on this phone).</div>
+</div>
+
+<h3>GEMINI (ONLINE)</h3>
+<div class="card">
+  <div class="st" style="margin-bottom:10px"><span class="dot" id="aidot"></span><span id="aist">No key yet</span></div>
+  <input id="aikey" type="password" placeholder="Your Gemini API key (optional if a PC is paired)" autocomplete="off">
+  <input id="aimodel" placeholder="Model (default gemini-2.5-flash)" autocomplete="off">
+  <button class="btn" onclick="N.saveAi(aikey.value.trim(),aimodel.value.trim());aikey.value='';setTimeout(pmAi,200)">SAVE</button>
+  <div style="height:8px"></div>
+  <button class="btn red" onclick="N.clearAiKey();setTimeout(pmAi,200)">REMOVE MY KEY</button>
+  <div class="or" style="margin:10px 0 0">Your key is used first. If empty, the app uses the key from your paired PC.</div>
+</div>
+
+<h3>SECURITY &amp; PRIVACY</h3>
+<div class="card">
+  <label class="chk"><input id="s_privacy" type="checkbox" onchange="N.setSwitch('privacy',this.checked);setTimeout(loadSec,200)"> <b>Privacy Shield</b>: Pragon only talks to my own devices</label>
+  <div class="hint">When on, Pragon refuses every connection that isn't to your own network (your PC, your Ollama server, this phone). Nothing is sent to Google, OpenAI or anyone else, Gemini is blocked, and speech recognition is asked to stay on the phone (install the offline speech pack in Google settings for a guarantee). Pragon has no analytics or ads.</div>
+  <label class="lb">Trusted hosts (my own servers with a public name, e.g. my-pc.tailnet.ts.net)</label>
+  <input id="s_trusted" placeholder="comma separated, empty = none" autocomplete="off" autocapitalize="none">
+  <button class="btn" onclick="N.saveTrusted(s_trusted.value);loadSec()">SAVE TRUSTED HOSTS</button>
+  <div class="hint" style="margin-top:10px"><b>Who Pragon contacted since it started:</b></div>
+  <div id="s_log" class="hint">Nothing yet.</div>
+  <div class="hint">Phone searches like "search pizza" or "play X on YouTube" open your browser or YouTube app themselves; those apps do their own networking.</div>
+  <hr style="border:0;border-top:1px solid rgba(0,212,255,.1);margin:12px 0">
+  <label class="chk"><input id="s_screen" type="checkbox" onchange="N.setSwitch('screenAI',this.checked)"> Let Pragon read my screen (for "read the screen", "what's on my screen", "answer this question")</label>
+  <div class="hint">Off by default. Pragon reads the visible text (never passwords, never a picture) and sends it ONLY to the AI you chose in AI ENGINE, which should be your own server.</div>
+  <label class="chk"><input id="s_a11y" type="checkbox" onchange="N.setSwitch('a11y',this.checked);setTimeout(loadSec,200)"> Let Pragon switch TalkBack, Select to Speak (text to speech) and Live Caption</label>
+  <div class="hint" id="s_a11yhint">Off by default. After you allow it, say "turn on talkback", "turn off live caption", "turn on text to speech". Android only lets Pragon flip these directly after a one-time permission over USB:</div>
+  <div class="hint"><code id="s_grant" style="color:var(--cyan);word-break:break-all"></code></div>
+  <div class="perm"><span>Change brightness by voice (Modify system settings)</span><b class="pill" id="s_ws">OFF</b><button class="btn" onclick="N.allowWriteSettings()">ALLOW</button></div>
+</div>
+
+<h3>APP SCANNER &amp; FIREWALL</h3>
+<div class="card">
+  <div class="hint">The scanner works fully offline: it looks at what each app is allowed to do, where it came from and whether it controls your phone. It is a safety check, not a virus-signature database (that would mean sending your app list to a company). Say "scan my phone" any time.</div>
+  <button class="btn" onclick="scanNow()">SCAN MY APPS</button>
+  <div id="s_scan" style="margin-top:8px"></div>
+  <hr style="border:0;border-top:1px solid rgba(0,212,255,.1);margin:12px 0">
+  <b style="font-size:13px">Firewall</b> <span class="pill" id="s_fwpill">OFF</span>
+  <div class="hint">A private on-device firewall. Android's VPN slot is used only as a trap door: the apps you pick lose internet (Wi-Fi and mobile data), and nothing is sent to any server. Android shows its key icon while it runs, and it can't run together with another VPN.</div>
+  <div class="seg"><button id="fw_block" onclick="fwMode('block')">BLOCK THE APPS I PICK</button><button id="fw_allow" onclick="fwMode('allow')">ONLY THE APPS I PICK GET INTERNET</button></div>
+  <button class="btn" id="s_fwbtn" onclick="toggleFw()">TURN ON FIREWALL</button>
+  <div class="hint" id="s_fwinfo" style="margin-top:6px"></div>
+  <div class="hint">Pick the apps in the list below (tab FIREWALL). Say "firewall on" any time; turning it OFF is done here, so nobody can switch it off by voice.</div>
+</div>
+
+<h3>APPS: ALLOWED, SIDEBAR, FIREWALL</h3>
+<div class="card">
+  <div class="tabs"><button id="t_allowed" onclick="tab('allowed')">ALLOWED</button><button id="t_sidebar" onclick="tab('sidebar')">SIDEBAR</button><button id="t_fw" onclick="tab('fw')">FIREWALL</button></div>
+  <div class="hint" id="t_hint"></div>
+  <label class="chk" id="t_limitrow"><input id="s_allow" type="checkbox" onchange="N.setSwitch('allowOnly',this.checked);setTimeout(loadSec,200)"> Only open the apps I allow (everything else is refused)</label>
+  <input id="t_filter" placeholder="Search apps" oninput="renderApps()" autocomplete="off">
+  <div class="row2" style="margin-bottom:8px"><button class="btn" onclick="pickAll(true)">SELECT ALL</button><button class="btn" onclick="pickAll(false)">CLEAR</button></div>
+  <div class="applist" id="t_list">Loading apps...</div>
+  <div style="height:8px"></div>
+  <button class="btn" onclick="saveApps()">SAVE THIS LIST</button>
+</div>
+
+<h3>SMART SIDEBAR</h3>
+<div class="card">
+  <label class="chk"><input id="sb_on" type="checkbox"> Show the sidebar</label>
+  <label class="chk"><input id="sb_left" type="checkbox"> Put it on the left edge (default: right)</label>
+  <button class="btn" onclick="N.setSidebar(sb_on.checked,sb_left.checked)">APPLY</button>
+  <div class="hint" style="margin-top:8px">A thin bar sits on the screen edge (drag it up or down to move it). Tap it or pull it inwards and a panel slides out: smart buttons that change with what you're doing (media controls while music plays, voice typing when a text box is open), flashlight, volume, brightness, screenshot, your favourite apps (pick them in the SIDEBAR tab above; most used first) and your macros. Say "open sidebar" or "sidebar off". Needs "Display over other apps".</div>
+</div>
+
+<h3>MACROS</h3>
+<div class="card">
+  <label class="chk"><input id="m_on" type="checkbox" onchange="N.setSwitch('macros',this.checked)"> Allow macros</label>
+  <div class="hint">Say "record macro morning", do your taps and commands, then "stop recording". Replay with "run macro morning" (or "run macro morning 3 times"). Pragon records buttons you tap by their name, scrolls, the apps you open and its own commands, never what you type and nothing on password screens. Tapping and scrolling need the accessibility service.</div>
+  <div class="row2"><input id="m_name" placeholder="Macro name" autocomplete="off"><button class="btn" id="m_rec" onclick="recMacro()">RECORD</button></div>
+  <div id="m_list" class="hint">No macros yet.</div>
+</div>
+
+<h3>BATTERY REMINDERS</h3>
+<div class="card">
+  <div class="hint" id="batnow" style="margin:0 0 8px"></div>
+  <label class="chk"><input id="batlow" type="checkbox"> Warn me when the battery is low</label>
+  <label class="lb">Warn at these levels (percent, comma separated)</label><input id="batlevels" placeholder="20,10,5" autocomplete="off">
+  <label class="lb">Remind me to unplug at (percent, 0 = off, 100 = fully charged)</label><input id="battarget" type="number" min="0" max="100" placeholder="80" autocomplete="off">
+  <button class="btn" onclick="saveBat()">SAVE</button>
+  <div class="hint" style="margin-top:8px" id="batsum"></div>
+  <div class="hint">Or say: <b>"battery reminder on"</b>, <b>"remind me to unplug at 80 percent"</b>, <b>"remind me when battery is 30 percent"</b>, <b>"cancel battery reminders"</b>. Alerts work with the screen off.</div>
+</div>
+
+<h3>FLOAT MODE (VOICE BUBBLE)</h3>
+<div class="card">
+  <div class="hint" style="margin:0">Tap the round <b>float button</b> next to the mic on the chat screen. A small bubble hovers over every app and listens. It also starts by itself whenever you open an app through Pragon.<br><br>
+  <b>"I'm home"</b> or <b>"Daddy's home"</b> (with or without "Pragon") - start listening (bubble turns cyan)<br>
+  <b>"open Instagram"</b>, <b>"close YouTube"</b>, <b>"set a timer for 5 minutes"</b>, <b>"flashlight on"</b>, <b>"search YouTube for lofi"</b>, <b>"go home"</b>, <b>"volume up"</b>, <b>"scroll down"</b><br>
+  <b>"pause"</b> / <b>"play"</b> (separate), <b>"click"</b>, <b>"click subscribe"</b>, <b>"calculate 25 times 4"</b>, <b>"start stopwatch"</b>, <b>"set alarm for 7 30 am"</b>, <b>"open wifi settings"</b>, <b>"typer mode"</b> (everything you say is typed; <b>"stop typing"</b> ends it)<br>
+  <b>"Mute"</b> - microphone fully off (tap the bubble to turn it back on)<br>
+  <b>"Goodbye"</b> - closes float mode<br><br>
+  Bubble: tap = listening on/off, drag = move, long-press = close. Needs the microphone, "Display over other apps", and the accessibility service (for closing apps).</div>
+</div>
+
+<h3>PERMISSIONS (needed once)</h3>
+<div class="card">
+  <div class="perm"><span>Accessibility service</span><i class="pill" id="p1">OFF</i><button class="btn" onclick="N.openA11y()">ENABLE</button></div>
+  <div class="perm"><span>Display over other apps</span><i class="pill" id="p2">OFF</i><button class="btn" onclick="N.openOverlay()">ALLOW</button></div>
+  <div class="perm"><span>Battery: don't restrict</span><i class="pill" id="p3">OFF</i><button class="btn" onclick="N.openBattery()">ALLOW</button></div>
+</div>
+
+<h3>DANGER ZONE</h3>
+<button class="btn red" id="fg" onclick="fgTap()">DISCONNECT AND FORGET THIS PC</button>
+
+<script>
+// Bridge: the Android app provides window.PragonNative; in a browser this mock lets you preview the page.
+const N=window.PragonNative||{
+  getState:()=>JSON.stringify({paired:true,host:'192.168.1.2:8000',status:'Connected to Pragon on your PC',a11y:true,overlay:false,battery:true}),
+  scanQr(){alert('(app) opens the QR scanner')},connect(h,k){alert('(app) pair with '+h+' key '+k)},
+  openA11y(){alert('(app) opens Accessibility settings')},openOverlay(){alert('(app) opens overlay permission')},openBattery(){alert('(app) opens battery permission')},
+  getAi:()=>JSON.stringify({own:false,pc:true,model:'gemini-2.5-flash',hint:''}),saveAi(k,m){alert('(app) saves AI settings')},clearAiKey(){alert('(app) removes key')},
+  getEngine:()=>JSON.stringify({engine:'gemini',ollamaHost:'http://192.168.1.2:11434',ollamaModel:'hermes3',openaiBase:'http://127.0.0.1:8080/v1',openaiModel:'',openaiKeySet:false}),
+  saveEngine(){alert('(app) saves engine')},clearEngineKey(){},listModels(){setTimeout(()=>pmModels({models:['hermes3:latest','llama3.2:latest'],error:''}),300)},pullModel(h,m){pmPullProgress(40,'pulling 40%',false);setTimeout(()=>pmPullProgress(100,'Done - '+m+' is ready.',true),800)},
+  listOllama(){setTimeout(()=>pmInstalled({models:[{name:'hermes3:latest',size:'4.7 GB'},{name:'llama3.2:3b',size:'2.0 GB'}],error:'',current:'hermes3'}),300)},useModel(h,m){},deleteModel(h,m){alert('(app) deletes '+m)},
+  getBattery:()=>JSON.stringify({lowOn:true,levels:'20,10,5',target:80,level:64,summary:'Battery reminders: low battery alerts at 20, 10, 5 percent.'}),saveBattery(){alert('(app) saves battery reminders')},
+  getSecurity:()=>JSON.stringify({privacy:true,allowOnly:false,screenAI:false,a11y:false,macros:true,trusted:'',fwOn:false,fwMode:'block',log:[{host:'192.168.1.20',allowed:true,count:12},{host:'generativelanguage.googleapis.com',allowed:false,count:1}],fwRunning:false,fwDropped:0,fwApps:0,allowedCount:0,secure:false,writeSettings:false,grantCmd:'adb shell pm grant com.pragon.mobile android.permission.WRITE_SECURE_SETTINGS',sidebarOn:false,sidebarLeft:false}),
+  setSwitch(){},saveTrusted(){},clearLog(){},getApps:()=>JSON.stringify([{pkg:'a.yt',label:'YouTube',allowed:true,sidebar:true,fw:false},{pkg:'a.ig',label:'Instagram',allowed:false,sidebar:false,fw:true}]),saveApps(){alert('(app) saves list')},
+  setFirewall(){},setFirewallMode(){},runScan(){setTimeout(()=>pmScan([{pkg:'x',label:'Sample app',level:'HIGH',reasons:['installed from outside a known app store','can read/send text messages and has internet']}]),400)},appInfo(){},uninstall(){},blockApp(){},allowWriteSettings(){},setSidebar(){},
+  listMacros:()=>JSON.stringify({macros:[{name:'morning',steps:3,text:'open YouTube > tap Subscribe > scroll down'}],recording:'',playing:''}),macroRun(){},macroDelete(){},macroRecord(){},macroStop(){},
+  getMode:()=>'master',saveMode(m){},getVoice:()=>JSON.stringify({callMe:'sir',speechLang:'',replyLang:'',rate:1,pitch:.95,voice:'',speakTyped:false,floatNeedsWake:false}),saveVoice(){alert('(app) saves voice')},listVoices:()=>JSON.stringify({ready:true,voices:[{name:'v1',label:'English (India) - en-in-x-ene'}]}),testVoice(){alert('(app) speaks')},nextVoice(){alert('(app) next voice')},getMemory:()=>JSON.stringify({count:2,text:'Name: Ravi\nCity: Chennai'}),clearMemory(){},
+  forget(){alert('(app) forgets this PC')},close(){history.length>1?history.back():window.close()}
+};
+window.pmRefresh=function(){const s=JSON.parse(N.getState());
+  document.getElementById('dot').classList.toggle('ok',s.paired);document.getElementById('stt').textContent=s.status||(s.paired?'Paired':'Not paired yet');
+  if(s.host&&!host.value)host.value=s.host;
+  [['p1',s.a11y],['p2',s.overlay],['p3',s.battery]].forEach(([i,v])=>{const e=document.getElementById(i);e.textContent=v?'ON':'OFF';e.classList.toggle('on',!!v);});};
+let fgArm=0;function fgTap(){const b=document.getElementById('fg');if(fgArm){fgArm=0;b.textContent='DISCONNECT AND FORGET THIS PC';N.forget();return;}fgArm=1;b.textContent='TAP AGAIN TO CONFIRM';setTimeout(()=>{fgArm=0;b.textContent='DISCONNECT AND FORGET THIS PC';},3000);}
+let aiInit=false;
+window.pmAi=function(){const a=JSON.parse(N.getAi());
+  document.getElementById('aidot').classList.toggle('ok',a.own||a.pc);
+  document.getElementById('aist').textContent=a.own?('Using your key '+a.hint):(a.pc?"Using your PC's key":'No key yet - add yours or pair a PC');
+  if(!aiInit){aiInit=true;document.getElementById('aimodel').value=a.model;}};
+let eng='gemini';
+function pickEng(e){eng=e;['gemini','ollama','openai'].forEach(x=>document.getElementById('e_'+x).classList.toggle('on',x===e));
+  document.getElementById('box_ollama').style.display=e==='ollama'?'block':'none';
+  document.getElementById('box_openai').style.display=e==='openai'?'block':'none';}
+function setModel(m){(eng==='openai'?cmodel:omodel).value=m;}
+function saveEng(){N.saveEngine(eng,ohost.value.trim(),omodel.value.trim(),cbase.value.trim(),ckey.value.trim(),cmodel.value.trim());ckey.value='';setTimeout(loadEng,300);}
+function refreshModels(){document.getElementById('modelst').textContent='Looking for models...';N.listModels(eng,ohost.value.trim(),cbase.value.trim(),ckey.value.trim());}
+window.pmModels=function(r){const st=document.getElementById('modelst');
+  if(r.error){st.textContent='Could not reach the server: '+r.error+'. Check the address and that it is running on the same Wi-Fi.';return;}
+  const dl=document.getElementById('mlist');dl.innerHTML='';r.models.forEach(m=>{const o=document.createElement('option');o.value=m;dl.appendChild(o);});
+  st.textContent=r.models.length?('Installed: '+r.models.join(', ')+'. Tap the model box to choose.'):'Connected, but no models yet. Pull one below.';};
+function doPull(){const n=pullname.value.trim()||omodel.value.trim();if(!n)return;pullbar.style.display='block';pullfill.style.width='3%';document.getElementById('pullst').textContent='Starting...';pullbtn.disabled=true;N.pullModel(ohost.value.trim(),n);}
+window.pmPullProgress=function(p,t,done){document.getElementById('pullst').textContent=t;if(p>=0)pullfill.style.width=Math.max(3,p)+'%';
+  if(done){pullbtn.disabled=false;if(p<0)pullfill.style.width='0%';else refreshInstalled();}};
+window.pmPull=function(t,done){document.getElementById('pullst').textContent=t;if(done&&t.startsWith('Done'))refreshModels();};
+function refreshInstalled(){inst.textContent='Looking...';N.listOllama(ohost.value.trim());}
+window.pmInstalled=function(r){if(r.error){inst.textContent='Could not reach the server: '+r.error+'. Check the address, that Ollama is running, and OLLAMA_HOST=0.0.0.0 on the PC.';return;}
+  if(!r.models.length){inst.textContent='Connected, but no models yet. Pull one below.';return;}
+  inst.innerHTML='';const dl=document.getElementById('mlist');dl.innerHTML='';
+  r.models.forEach(m=>{const o=document.createElement('option');o.value=m.name;dl.appendChild(o);
+    const row=document.createElement('div');row.className='mrow'+((m.name===r.current||m.name===r.current+':latest')?' cur':'');
+    const sp=document.createElement('span');sp.textContent=m.name+(m.size?' ':'');if(m.size){const s=document.createElement('small');s.textContent=m.size;sp.appendChild(s);}row.appendChild(sp);
+    const u=document.createElement('button');u.textContent='USE';u.onclick=()=>{N.useModel(ohost.value.trim(),m.name);omodel.value=m.name;setTimeout(refreshInstalled,300);};row.appendChild(u);
+    const d=document.createElement('button');d.className='d';d.textContent='DELETE';d.onclick=()=>{if(confirm('Delete '+m.name+' from the server?'))N.deleteModel(ohost.value.trim(),m.name);};row.appendChild(d);
+    inst.appendChild(row);});};
+function loadBat(){const b=JSON.parse(N.getBattery());batnow.textContent='Battery now: '+(b.level>=0?b.level+'%':'unknown');batlow.checked=b.lowOn;batlevels.value=b.levels;battarget.value=b.target||'';batsum.textContent=b.summary;}
+function saveBat(){N.saveBattery(batlow.checked,batlevels.value.trim(),parseInt(battarget.value||'0',10)||0);setTimeout(loadBat,300);}
+
+// ---- security, apps, sidebar, macros ----
+let SEC={},APPS=[],curTab='allowed';
+const TAB_HINT={allowed:'Tick the apps Pragon may open for you. With the limit switched on, anything else is refused (by voice, chat and macros).',sidebar:'Tick up to 16 favourite apps to show in the sidebar.',fw:'Tick the apps the firewall acts on (blocked, or the only ones allowed, depending on the mode above).'};
+function loadSec(){let s;try{s=JSON.parse(N.getSecurity());}catch(e){return;}SEC=s;
+  s_privacy.checked=s.privacy;s_trusted.value=s.trusted;s_screen.checked=s.screenAI;s_a11y.checked=s.a11y;s_allow.checked=s.allowOnly;m_on.checked=s.macros;
+  s_grant.textContent=s.secure?'WRITE_SECURE_SETTINGS is granted. TalkBack and Live Caption can be switched directly.':s.grantCmd;
+  s_ws.textContent=s.writeSettings?'ON':'OFF';s_ws.className='pill'+(s.writeSettings?' on':'');
+  s_log.innerHTML=s.log.length?'':'Nothing yet.';s.log.forEach(l=>{const d=document.createElement('div');d.className='lg'+(l.allowed?'':' bad');d.innerHTML='<span>'+(l.allowed?'OK':'BLOCKED')+'</span><b></b><span>x'+l.count+'</span>';d.querySelector('b').textContent=l.host;s_log.appendChild(d);});
+  s_fwpill.textContent=s.fwRunning?'ON':'OFF';s_fwpill.className='pill'+(s.fwRunning?' on':'');
+  fw_block.classList.toggle('on',s.fwMode==='block');fw_allow.classList.toggle('on',s.fwMode==='allow');
+  s_fwbtn.textContent=s.fwRunning?'TURN OFF FIREWALL':'TURN ON FIREWALL';
+  s_fwinfo.textContent=s.fwApps+' app'+(s.fwApps===1?'':'s')+' on the firewall list.'+(s.fwRunning?' Packets dropped so far: '+s.fwDropped+'.':'');
+  sb_on.checked=s.sidebarOn;sb_left.checked=s.sidebarLeft;}
+function toggleFw(){N.setFirewall(!SEC.fwRunning);setTimeout(loadSec,600);}
+function fwMode(m){N.setFirewallMode(m);setTimeout(loadSec,200);}
+function scanNow(){s_scan.innerHTML='<div class="hint">Scanning...</div>';N.runScan();}
+window.pmScan=function(a){s_scan.innerHTML='';if(!a.length){s_scan.innerHTML='<div class="hint">Nothing suspicious found.</div>';return;}
+  a.forEach(f=>{const d=document.createElement('div');d.className='fnd';const t=document.createElement('div');t.innerHTML='<span class="lvl '+f.level+'">'+f.level+'</span> ';const n=document.createElement('b');n.textContent=f.label;t.appendChild(n);d.appendChild(t);
+    const ul=document.createElement('ul');f.reasons.forEach(r=>{const li=document.createElement('li');li.textContent=r;ul.appendChild(li);});d.appendChild(ul);
+    const ac=document.createElement('div');ac.className='acts';
+    [['BLOCK INTERNET',()=>N.blockApp(f.pkg)],['APP INFO',()=>N.appInfo(f.pkg)],['UNINSTALL',()=>{if(confirm('Uninstall '+f.label+'?'))N.uninstall(f.pkg)}]].forEach(b=>{const x=document.createElement('button');x.textContent=b[0];x.onclick=b[1];ac.appendChild(x);});
+    d.appendChild(ac);s_scan.appendChild(d);});};
+function tab(t){curTab=t;['allowed','sidebar','fw'].forEach(x=>document.getElementById('t_'+x).classList.toggle('on',x===t));t_hint.textContent=TAB_HINT[t];t_limitrow.style.display=t==='allowed'?'flex':'none';renderApps();}
+function loadApps(){try{APPS=JSON.parse(N.getApps());}catch(e){APPS=[];}tab(curTab);}
+function renderApps(){const q=t_filter.value.trim().toLowerCase();t_list.innerHTML='';
+  APPS.filter(a=>!q||a.label.toLowerCase().includes(q)).forEach(a=>{const r=document.createElement('label');r.className='pk';const c=document.createElement('input');c.type='checkbox';c.checked=!!a[curTab];c.onchange=()=>{a[curTab]=c.checked;};const s=document.createElement('span');s.textContent=a.label;r.appendChild(c);r.appendChild(s);t_list.appendChild(r);});}
+function pickAll(v){const q=t_filter.value.trim().toLowerCase();APPS.forEach(a=>{if(!q||a.label.toLowerCase().includes(q))a[curTab]=v;});renderApps();}
+function saveApps(){N.saveApps(curTab,JSON.stringify(APPS.filter(a=>a[curTab]).map(a=>a.pkg)));setTimeout(loadSec,300);}
+function loadMacros(){let r;try{r=JSON.parse(N.listMacros());}catch(e){return;}
+  m_rec.textContent=r.recording?'STOP & SAVE':'RECORD';m_list.innerHTML='';
+  if(r.recording){const d=document.createElement('div');d.textContent='Recording "'+r.recording+'"... do your steps, then press STOP & SAVE.';d.style.color='#ef4444';m_list.appendChild(d);}
+  if(!r.macros.length&&!r.recording){m_list.textContent='No macros yet.';return;}
+  r.macros.forEach(m=>{const row=document.createElement('div');row.className='mrow';const sp=document.createElement('span');sp.textContent=m.name+' ';const sm=document.createElement('small');sm.textContent=m.steps+' steps';sp.appendChild(sm);row.appendChild(sp);
+    const p=document.createElement('button');p.textContent='RUN';p.onclick=()=>N.macroRun(m.name);row.appendChild(p);
+    const d=document.createElement('button');d.className='d';d.textContent='DELETE';d.onclick=()=>{if(confirm('Delete macro '+m.name+'?'))N.macroDelete(m.name);};row.appendChild(d);m_list.appendChild(row);
+    const t=document.createElement('div');t.className='hint';t.style.margin='0 0 6px';t.textContent=m.text;m_list.appendChild(t);});}
+function recMacro(){const r=JSON.parse(N.listMacros());if(r.recording){N.macroStop();}else{N.macroRecord(m_name.value.trim()||'macro');m_name.value='';}setTimeout(loadMacros,300);}
+function loadEng(){const e=JSON.parse(N.getEngine());ohost.value=e.ollamaHost;omodel.value=e.ollamaModel;cbase.value=e.openaiBase;cmodel.value=e.openaiModel;
+  document.getElementById('keyst').textContent=e.openaiKeySet?'An API key is saved.':'';pickEng(e.engine);}
+
+let curMode='master';
+const MODE_HINT={assistant:'Only talks and holds a conversation. It will not touch your phone.',master:'Default. Talks AND acts: "open YouTube" opens it, then Pragon says "YouTube opened".',agent:'Acts with as little talk as possible. Silent when it works; speaks only if something fails or you ask a question.'};
+function pickMode(m,save){curMode=m;['assistant','master','agent'].forEach(x=>document.getElementById('m_'+x).classList.toggle('on',x===m));document.getElementById('modehint').textContent=MODE_HINT[m];if(save!==false)N.saveMode(m);}
+function loadMode(){pickMode(N.getMode(),false);}
+function saveVoice(){N.saveVoice(callme.value.trim(),slang.value,rlang.value,parseFloat(vrate.value),parseFloat(vpitch.value),vname.value,stype.checked,fwake.checked);}
+function loadVoice(){const v=JSON.parse(N.getVoice());callme.value=v.callMe;slang.value=v.speechLang;rlang.value=v.replyLang;vrate.value=v.rate;vpitch.value=v.pitch;stype.checked=v.speakTyped;fwake.checked=v.floatNeedsWake;
+  rv.textContent=Number(v.rate).toFixed(2);pv.textContent=Number(v.pitch).toFixed(2);loadVoices(v.voice,0);}
+vrate.oninput=()=>rv.textContent=Number(vrate.value).toFixed(2);vpitch.oninput=()=>pv.textContent=Number(vpitch.value).toFixed(2);
+function loadVoices(sel,tries){let r;try{r=JSON.parse(N.listVoices());}catch(e){return;}
+  if(!r.ready&&tries<8){setTimeout(()=>loadVoices(sel,tries+1),500);return;}
+  vname.innerHTML='<option value="">Best available</option>';r.voices.forEach(x=>{const o=document.createElement('option');o.value=x.name;o.textContent=x.label;vname.appendChild(o);});vname.value=sel||'';}
+slang.onchange=()=>setTimeout(()=>loadVoices('',0),100);
+function loadMem(){const m=JSON.parse(N.getMemory());memst.textContent=m.count?('Pragon remembers '+m.count+' thing'+(m.count>1?'s':'')+' about you:'):'Nothing yet. Tell Pragon things like "my name is ..." and it will remember.';memtx.textContent=m.text;}
+loadMode();loadVoice();loadMem();loadBat();loadSec();loadApps();loadMacros();setInterval(loadMacros,3000);
+loadEng();
+pmRefresh();pmAi();setInterval(pmRefresh,1500);
+</script></body></html>
